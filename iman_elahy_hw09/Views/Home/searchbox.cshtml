@@ -1,0 +1,9 @@
+﻿@model Member
+<form class="row g-3" asp-controller="Home" asp-action="search"  method="post">
+    <label for="Name" class="form-label"> نام ونام خانوادگی</label>
+  <input type="text" asp-for=Name class="form-control">
+  <div dir="rtl">
+    <input type="submit" class="btn btn-success" value="تایید" >
+      <a class="btn btn-outline-danger"asp-controller="Home" asp-action="Index"  dir="rtl">بازگشت به لیست </a>
+  </div>
+</form>

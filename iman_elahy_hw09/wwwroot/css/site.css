@@ -1,0 +1,38 @@
+@font-face {
+    font-family: 'BDavat';
+    src: url('farsi/BDavat.eot?#') format('eot'), 
+    url('farsi/BDavat.woff') format('woff'), 
+    url('farsi/BDavat.ttf') format('truetype'); 
+}
+@font-face {
+    font-family: 'BTitrBold';
+    src: url('farsi/BTitrBold.eot?#') format('eot'), /* IE6–8 */
+    url('farsi/BTitrBold.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('farsi/BTitrBold.ttf') format('truetype'); /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+}
+
+*{
+    font-family:BDavat;
+    font-size: x-large
+}
+html {
+    font-family: BDavat;
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+    font-family: BDavat;
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    font-family: BDavat;
+    margin-bottom: 60px;
+}

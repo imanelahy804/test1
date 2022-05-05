@@ -1,0 +1,67 @@
+﻿@model List<Member>
+@{
+    ViewData["Title"] = "لیست افراد";
+}
+<a class="btn btn-danger"asp-controller="Home" asp-action="create"  dir="rtl">ثبت نام</a>
+<a class="btn btn-danger"asp-controller="Home" asp-action="searchbox"  dir="rtl"> جست و جو</a>
+<table class="table  table-dark table-striped" dir="rtl">
+  <thead>
+    <tr>
+      
+      <th scope="col">شماره</th>
+      <th scope="col">شناسه</th>
+      <th scope="col">نام </th>
+      <th scope="col">نام خانوادگی </th>
+      <th scope="col">کد ملی</th>
+      <th scope="col">تاریخ ثبت نام </th>
+       <th scope="col">شماره تماس</th>
+      <th scope="col">وضعیت</th>
+      <th scope="col">جنسیت </th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    @for (var i = 0; i < Model.Count; i++)
+    {
+        <tr>
+         <th scope="row">@(i+1)</th>
+      <td>@Model[i].ID</td>
+      <td>@Model[i].Name</td>
+      <td>@Model[i].LastName</td>
+      <td>@Model[i].NationalCode</td>
+      <td>@Model[i].RegistrationDate</td>
+      <td>@Model[i].PhoneNumber</td>
+      @if ((int)Member.Level.Gold==Model[i].levelindex)
+      {
+                    <td>طلایی</td>
+                }else if ((int)Member.Level.silver == Model[i].levelindex)
+                {
+                      <td>نقره ای</td>
+                    
+                }else{
+                     <td>برنز</td>
+
+                }
+    @if ((int)Member.Gender.Famale==Model[i].Genderindex)
+      {
+                    <td>موءنث</td>
+                }else 
+                {
+                      <td>مذکر</td>
+                    
+                }
+
+     
+
+      <td> <a class="btn btn-danger"asp-controller="Home" asp-action="delete" asp-route-id="@Model[i].ID">حذف</a>
+          <a class="btn btn-primary"asp-controller="Home" asp-action="edite" asp-route-id="@Model[i].ID">ویرایش</a>
+          </td>
+        </tr>
+    }
+     
+    
+   
+    
+  </tbody>
+</table>
