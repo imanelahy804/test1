@@ -16,8 +16,10 @@
             Male=0,
             Famale=1,
         }
+       
+        public int libraryId { get; set; }
 
-        
+
 
     }
 }

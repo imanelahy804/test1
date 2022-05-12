@@ -1,6 +1,8 @@
 ﻿using iman_elahy_hw09.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using iman_elahy_hw09.data;
+using iman_elahy_hw09.Models.viewmodel;
 
 namespace iman_elahy_hw09.Controllers
 {
@@ -16,7 +18,9 @@ namespace iman_elahy_hw09.Controllers
         public IActionResult Index()
         {
 
-            var users = Memberrepository.ListUser;
+
+
+            var users = DBrepository.listlibrary();
             return View(users);
         }
 
@@ -72,37 +76,33 @@ namespace iman_elahy_hw09.Controllers
             user.NationalCode=member.NationalCode;
             return RedirectToAction("Index");
         }
+        
         public IActionResult delete(int id)
-        {
-            var user = Memberrepository.ListUser.FirstOrDefault(x => x.ID ==id);
-            Memberrepository.ListUser.Remove(user);
-            return RedirectToAction("Index");
+        { 
+
+            
+            memberDBContext member = new();
+           var m=member.members.Where(x=> x.ID==id).FirstOrDefault();
+            member.Remove(m);
+            member.SaveChanges();
+            return RedirectToAction("Memberview");
         }
         public IActionResult searchbox()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult search(Member member)
+        public IActionResult search(listlibraryvm searchlist)
         {
-            var name = member.Name;
-            var sname = name.Split(' ');
-            List<Member> users = new();
-            for (int i = 0; i < sname.Length; i++)
-            {
-                foreach (var item in Memberrepository.ListUser)
-                {
-                    if (item.Name.Contains(sname[i])|| item.LastName.Contains(sname[i]))
-                    {
-                        if (false==users.Any(x=> x.ID==item.ID))
-                        {
-                            users.Add(item);
-                        }
-                        
-                    }
-                }
-            }
-            return View("search",users);
+            var result = DBrepository.searchDB(searchlist);
+
+            return View("search",result);
+        }
+        public IActionResult Memberlist()
+        {
+            memberDBContext member = new();
+            var result = member.members.ToList();
+            return View("Memberview", result);
         }
     }
 }

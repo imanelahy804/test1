@@ -1,0 +1,94 @@
+﻿@model List<Member>
+@{
+    ViewData["Title"] = "لیست افراد";
+}
+<a class="btn btn-danger"asp-controller="Home" asp-action="create"  dir="rtl">ثبت نام</a>
+<a class="btn btn-danger"asp-controller="Home" asp-action="searchbox"  dir="rtl"> جست و جو</a>
+<table class="table  table-dark table-striped" dir="rtl">
+  <thead>
+    <tr>
+      
+      <th scope="col">شماره</th>
+      <th scope="col">شناسه</th>
+      <th scope="col">نام </th>
+      <th scope="col">نام خانوادگی </th>
+      <th scope="col">کد ملی</th>
+      <th scope="col">تاریخ ثبت نام </th>
+       <th scope="col">شماره تماس</th>
+      <th scope="col">وضعیت</th>
+      <th scope="col">جنسیت </th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    @for (var i = 0; i < Model.Count; i++)
+    {
+        <tr>
+         <th scope="row">@(i+1)</th>
+      <td>@Model[i].ID</td>
+      <td>@Model[i].Name</td>
+      <td>@Model[i].LastName</td>
+      <td>@Model[i].NationalCode</td>
+      <td>@Model[i].RegistrationDate</td>
+      <td>@Model[i].PhoneNumber</td>
+      @if ((int)Member.Level.Gold==Model[i].levelindex)
+      {
+                    <td>طلایی</td>
+                }else if ((int)Member.Level.silver == Model[i].levelindex)
+                {
+                      <td>نقره ای</td>
+                    
+                }else{
+                     <td>برنز</td>
+
+                }
+    @if ((int)Member.Gender.Famale==Model[i].Genderindex)
+      {
+                    <td>موءنث</td>
+                }else 
+                {
+                      <td>مذکر</td>
+                    
+                }
+
+     
+
+      <td> <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="setid(@Model[i].ID)">
+            حذف
+          </button>
+          </td>
+        </tr>
+    }
+     
+    
+   
+    
+  </tbody>
+</table>
+<form class="row g-3" asp-controller="Home" asp-action="delete" method="post" >
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">حذف رکورد</h5>
+       
+      </div>
+      <div class="modal-body">
+        آیا میخواهید این رکورد را حذف کنید ؟
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+        <input type="submit" class="btn btn-success" value="حذف" onclick="deletem()" >
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+<script>
+     var id;
+     
+    function deletem(){
+       window.location.href = '@Url.Action("delete", "Home")/' + id;
+   }
+</script>

@@ -6,16 +6,18 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using iman_elahy_hw09.Models.viewmodel;
+using iman_elahy_hw09.data;
 namespace iman_elahy_hw09.Models
 {
     public class Memberrepository
-   {
+    {
         public static List<Member> ListUser = new List<Member>();
         public void AddMember()
         {
 
         }
-    //    private const string connectionString = "Server=DESKTOP-BJ7SRVH;Database=MemberDB;user id=sa;password=123456;MultipleActiveResultSets=True;TrustServerCertificate=True";
+        //    private const string connectionString = "Server=DESKTOP-BJ7SRVH;Database=MemberDB;user id=sa;password=123456;MultipleActiveResultSets=True;TrustServerCertificate=True";
 
 
         //    public void AddMember(string Name, string lastName, int NationalCode, int levelendex, string phonenumber, int genderendex)
@@ -67,5 +69,8 @@ namespace iman_elahy_hw09.Models
         //        }
 
         //    }
+        
+
+
     }
 }
